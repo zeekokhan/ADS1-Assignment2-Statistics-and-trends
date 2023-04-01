@@ -94,3 +94,89 @@ plt.xlabel("Year")
 plt.legend()
 plt.show()
 
+
+# In[6]:
+
+
+# Create a bar chart of the population of the top two poorest countries in 2021
+temp["2021"].plot(kind="bar", figsize=(10, 4))
+plt.title("Population Comparison by Year 2021")
+plt.ylabel("Population")
+plt.show()
+
+
+# In[7]:
+
+
+# Get summary statistics for the female population percentage indicator for the top two poorest countries
+indicator = "Population, female (% of total population)"
+
+temp = years_df.reset_index()
+temp = temp[temp["Country Name"].isin(countries)]
+temp = temp[temp["Indicator Name"] == indicator].drop(["Country Code", "Indicator Code", "Indicator Name"], axis=1).set_index("Country Name")
+temp.T.plot(kind="line", figsize=(10, 4))
+plt.title("Female Percentage in Population of Countries by Year")
+plt.ylabel("Percentage")
+plt.xlabel("Year")
+plt.legend()
+plt.show()
+
+
+# In[8]:
+
+
+# Create a bar chart of the female population percentage of the top two poorest countries in 2021
+temp["2021"].plot(kind="bar", figsize=(10, 4))
+plt.title("Female Percentage by Year 2021")
+plt.show()
+
+
+# In[9]:
+
+
+# Get summary statistics for the male population percentage indicator for the top two poorest countries
+indicator = "Population, male (% of total population)"
+
+temp = years_df.reset_index()
+temp = temp[temp["Country Name"].isin(countries)]
+temp = temp[temp["Indicator Name"] == indicator].drop(["Country Code", "Indicator Code", "Indicator Name"], axis=1).set_index("Country Name")
+temp.T.plot(kind="line", figsize=(10, 4))
+plt.title("Male Percentage in Population of Countries by Year")
+plt.ylabel("Percentage")
+plt.xlabel("Year")
+plt.legend()
+plt.show()
+
+
+# In[10]:
+
+
+# Get the median poverty rate at $2.15 a day for the top two poorest countries
+indicators = ['Poverty headcount ratio at $2.15 a day (2017 PPP) (% of population)']
+
+temp = years_df.reset_index()
+temp = temp[temp["Country Name"].isin(countries)]
+temp = temp[temp["Indicator Name"].isin(indicators)].drop(["Country Code", "Indicator Code", "Indicator Name"], axis=1).set_index(["Country Name"]).T
+
+temp.median().plot(kind="bar", figsize=(10, 4))
+plt.title("Poverty Rate at 2.15 Ratio")
+plt.ylabel("Poverty Rate")
+plt.ylim(65, 75)
+plt.show()
+
+
+# In[11]:
+
+
+# Get the median poverty rate at $6.85 a day for the top two poorest countries
+indicators = ['Poverty headcount ratio at $6.85 a day (2017 PPP) (% of population)']
+
+temp = years_df.reset_index()
+temp = temp[temp["Country Name"].isin(countries)]
+temp = temp[temp["Indicator Name"].isin(indicators)].drop(["Country Code", "Indicator Code", "Indicator Name"], axis=1).set_index(["Country Name"]).T
+
+temp.median().plot(kind="bar", figsize=(10, 4))
+plt.title("Poverty Rate at 6.85 Ratio")
+plt.ylabel("Poverty Rate")
+plt.ylim(85, 100)
+plt.show()
